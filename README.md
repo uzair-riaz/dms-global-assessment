@@ -79,12 +79,12 @@ A modern real-time social feed application built with Laravel, Inertia.js, Vue 3
 
 ## 🏃‍♀️ Running the Application
 
-**Start the Laravel and Vite development server**
+1. **Start the Laravel and Vite development server**
    ```bash
    composer run dev
    ```
 
-3. **Access the application**
+2. **Access the application**
    - Open [http://localhost:8000](http://localhost:8000) in your browser
 
 ## 🧪 Running Tests
