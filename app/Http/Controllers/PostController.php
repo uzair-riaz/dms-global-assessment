@@ -10,17 +10,16 @@ class PostController extends Controller
 {
     public function index()
     {
-        return Post::latest()->get();
+        return Post::with('user')->latest()->get();
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 
-        Post::create($validated);
+        $request->user()->posts()->create($validated);
 
         return redirect()->back();
     }
