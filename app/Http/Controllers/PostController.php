@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,13 +14,9 @@ class PostController extends Controller
         return Post::with('user')->latest()->get();
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validated = $request->validate([
-            'content' => 'required|string',
-        ]);
-
-        $request->user()->posts()->create($validated);
+        $request->user()->posts()->create($request->validated());
 
         return redirect()->back();
     }
