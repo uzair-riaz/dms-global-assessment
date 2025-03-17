@@ -11,7 +11,9 @@ class PostController extends Controller
 {
     public function index()
     {
-        return Post::with('user')->latest()->get();
+        return Inertia::render('Feed', [
+            'posts' => Post::with('user')->latest()->get()
+        ]);
     }
 
     public function store(StorePostRequest $request)
