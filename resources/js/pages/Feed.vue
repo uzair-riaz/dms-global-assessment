@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItemType } from '@/types';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, useForm, usePoll } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
 
 interface User {
@@ -35,6 +35,8 @@ const breadcrumbs: BreadcrumbItemType[] = [
 const form = useForm({
   content: '',
 });
+
+usePoll(5000);
 
 const submitForm = () => {
   form.post('/posts', {
