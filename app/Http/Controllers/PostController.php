@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Post;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PostController extends Controller
