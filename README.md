@@ -1,63 +1,123 @@
-# Social Feed App
+# 📱 Social Feed App
 
-A real-time social feed application built with Laravel, Inertia.js, Vue 3, and Tailwind CSS.
+A modern real-time social feed application built with Laravel, Inertia.js, Vue 3, and Tailwind CSS.
 
-## Features
+![Laravel](https://img.shields.io/badge/Laravel-12.2-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Vue.js](https://img.shields.io/badge/Vue.js-3.5-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.2-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 
-- Create posts with title and content
-- Real-time updates using polling
-- Modern UI with Tailwind CSS
-- Server-side rendering with Inertia.js
-- Vue 3 components with Composition API
+## ✨ Features
 
-## Technologies Used
+- 🔄 Real-time post updates using polling (every 5 seconds)
+- 📝 Create and share posts with the community
+- 👤 User authentication and profile management
+- 🎨 Modern, responsive UI with Tailwind CSS
+- 🔄 Server-side rendering with Inertia.js
+- 📱 Mobile-friendly design
+- 🌙 Dark mode support
+- 🔐 Email verification
+- 🔑 Password reset functionality
 
-- Laravel 10.x
-- Inertia.js
-- Vue 3
-- Tailwind CSS
-- SQLite (default database)
+## 🛠️ Technologies Used
 
-## Setup Instructions
+- **Backend:**
+  - Laravel 12.x - PHP framework
+  - SQLite (default database)
+  - InertiaJS - Server-side rendering
 
-1. Clone the repository
-2. Install PHP dependencies:
+- **Frontend:**
+  - Vue 3 - JavaScript framework with Composition API
+  - TypeScript - Type-safe JavaScript
+  - Tailwind CSS - Utility-first CSS framework
+  - Radix UI components - Accessible UI components
+  - Lucide icons - Beautiful SVG icons
+  
+- **Development Tools:**
+  - Vite - Modern build tool
+  - ESLint - JavaScript/TypeScript linter
+  - Prettier - Code formatter
+  - TypeScript - Static type checking
+
+## 🚀 Setup Instructions
+
+### Prerequisites
+
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/uzair-riaz/dms-global-assessment.git
+   cd dms-global-assessment
+   ```
+
+2. **Install PHP dependencies**
    ```bash
    composer install
    ```
-3. Install Node.js dependencies:
+
+3. **Install JavaScript dependencies**
    ```bash
    npm install
    ```
-4. Copy the environment file:
+
+4. **Set up environment variables**
    ```bash
    cp .env.example .env
-   ```
-5. Generate application key:
-   ```bash
    php artisan key:generate
    ```
-6. Run migrations:
+
+5. **Run migrations**
    ```bash
    php artisan migrate
    ```
-7. Start the development server:
+
+## 🏃‍♀️ Running the Application
+
+**Start the Laravel and Vite development server**
    ```bash
-   php artisan serve
-   ```
-8. In a separate terminal, start the Vite development server:
-   ```bash
-   npm run dev
+   composer run dev
    ```
 
-## Real-time Updates
+3. **Access the application**
+   - Open [http://localhost:8000](http://localhost:8000) in your browser
+
+## 🧪 Running Tests
+
+Run the tests with phpunit:
+
+```bash
+php artisan test
+```
+
+## 📁 Project Structure
+
+- `app/`
+  - `Http/Controllers/PostController.php` - Handles post creation and retrieval
+  - `Http/Controllers/Auth/` - Authentication controllers
+  - `Models/` - Eloquent models (User, Post)
+  
+- `resources/`
+  - `js/` - JavaScript/Vue files
+    - `Pages/` - Top-level Vue components
+      - `Feed.vue` - Main feed page
+      - `auth/` - Authentication pages
+    - `Components/` - Reusable Vue components
+  - `views/` - Blade templates
+  
+- `routes/`
+  - `web.php` - Web routes
+  - `auth.php` - Authentication routes
+  
+- `tests/` - Test files
+  - `Feature/` - Feature tests
+  - `Unit/` - Unit tests
+
+## 🔄 Real-time Updates
 
 The application uses polling to achieve real-time updates. Posts are fetched every 5 seconds to ensure users see the latest content without refreshing the page.
-
-## Project Structure
-
-- `app/Http/Controllers/PostController.php` - Handles post creation and retrieval
-- `app/Models/Post.php` - Post model with fillable fields
-- `resources/js/Components/Posts.vue` - Vue component for displaying and creating posts
-- `resources/js/Pages/Home.vue` - Main page component
-- `database/migrations/` - Database migrations for posts table 
