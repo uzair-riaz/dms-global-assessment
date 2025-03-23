@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  # Laravel Application
+  social_feed_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: social_feed_app
+    restart: unless-stopped
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - social_feed_db
+      - social_feed_redis
+    networks:
+      - social_feed_network
+
+  # MySQL Database
+  social_feed_db:
+    image: mysql:8.0
+    container_name: social_feed_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: social_feed
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - social_feed_db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - social_feed_network
+
+  # Redis Cache
+  social_feed_redis:
+    image: redis:alpine
+    container_name: social_feed_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - social_feed_redis_data:/data
+    networks:
+      - social_feed_network
+
+networks:
+  social_feed_network:
+    driver: bridge
+
+volumes:
+  social_feed_db_data:
+  social_feed_redis_data:
+    driver: local 
