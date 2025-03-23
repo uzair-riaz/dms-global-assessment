@@ -54,4 +54,4 @@ networks:
 volumes:
   social_feed_db_data:
   social_feed_redis_data:
-    driver: local 
+    driver: local
