@@ -19,81 +19,37 @@ A modern real-time social feed application built with Laravel, Inertia.js, Vue 3
 - 🔐 Email verification
 - 🔑 Password reset functionality
 
-## 🛠️ Technologies Used
-
-- **Backend:**
-  - Laravel 12.x - PHP framework
-  - SQLite (default database)
-  - InertiaJS - Server-side rendering
-
-- **Frontend:**
-  - Vue 3 - JavaScript framework with Composition API
-  - TypeScript - Type-safe JavaScript
-  - Tailwind CSS - Utility-first CSS framework
-  - Radix UI components - Accessible UI components
-  - Lucide icons - Beautiful SVG icons
-  
-- **Development Tools:**
-  - Vite - Modern build tool
-  - ESLint - JavaScript/TypeScript linter
-  - Prettier - Code formatter
-  - TypeScript - Static type checking
-
 ## 🚀 Setup Instructions
 
 ### Prerequisites
 
-- PHP 8.2+
-- Composer
-- Node.js 18+
-- npm or yarn
+- Docker
+- Docker Compose
 
-### Installation
+## Docker Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/uzair-riaz/dms-global-assessment.git
-   cd dms-global-assessment
-   ```
+This project is configured to run using Docker with MySQL for database and Redis for caching.
 
-2. **Install PHP dependencies**
-   ```bash
-   composer install
-   ```
+### Requirements
 
-3. **Install JavaScript dependencies**
-   ```bash
-   npm install
-   ```
+- Docker
+- Docker Compose
 
-4. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
+### Getting Started
 
-5. **Run migrations**
-   ```bash
-   php artisan migrate
-   ```
+1. Clone the repository
+2. Navigate to the project directory
+3. Build and start the containers:
+    ```bash
+    docker-compose up -d
+    ```
 
-## 🏃‍♀️ Running the Application
+4. The application will be available at: http://localhost:8000
 
-1. **Start the Laravel and Vite development server**
-   ```bash
-   composer run dev
-   ```
-
-2. **Access the application**
-   - Open [http://localhost:8000](http://localhost:8000) in your browser
-
-## 🧪 Running Tests
-
-Run the tests with phpunit:
-
-```bash
-php artisan test
-```
+5. To stop the containers:
+    ```bash
+    docker-compose down
+    ```
 
 ## 📁 Project Structure
 
