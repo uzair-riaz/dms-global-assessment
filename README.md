@@ -38,15 +38,18 @@ This project is configured to run using Docker with MySQL for database and Redis
 ### Getting Started
 
 1. Clone the repository
-2. Navigate to the project directory
-3. Build and start the containers:
+    ```bash
+   git clone https://github.com/uzair-riaz/dms-global-assessment.git
+   cd dms-global-assessment
+   ```
+2. Build and start the containers:
     ```bash
     docker-compose up -d
     ```
 
-4. The application will be available at: http://localhost:8000
+3. The application will be available at: http://localhost:8000
 
-5. To stop the containers:
+4. To stop the containers:
     ```bash
     docker-compose down
     ```
