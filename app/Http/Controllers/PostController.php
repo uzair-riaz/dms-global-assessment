@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\StorePostRequest;
-use App\Models\Post;
-use Illuminate\Support\Facades\Cache;
+use App\Services\Interfaces\PostServiceInterface;
 use Inertia\Inertia;
 
 class PostController extends Controller
 {
+    protected $postService;
+
+    public function __construct(PostServiceInterface $postService)
+    {
+        $this->postService = $postService;
+    }
+
     public function index()
     {
-        $posts = Cache::remember('posts.latest.100', null, function () {
-            return Post::with('user')->latest()->take(100)->get();
-        });
+        $posts = $this->postService->getLatestPosts();
 
         return Inertia::render('Feed', [
             'posts' => $posts
@@ -22,7 +26,10 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $request->user()->posts()->create($request->validated());
+        $this->postService->createPost([
+            'content' => $request->validated()['content'],
+            'user_id' => $request->user()->id
+        ]);
 
         return redirect()->back();
     }
