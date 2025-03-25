@@ -2,8 +2,9 @@
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItemType } from '@/types';
-import { Head, useForm, usePoll } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 interface User {
   id: number;
@@ -23,7 +24,16 @@ interface Props {
   posts: Post[];
 }
 
+interface FormData {
+  content: string;
+}
+
+interface NewPostEvent {
+  post: Post;
+}
+
 const props = defineProps<Props>();
+const posts = ref<Post[]>(props.posts);
 
 const breadcrumbs: BreadcrumbItemType[] = [
     {
@@ -32,15 +42,28 @@ const breadcrumbs: BreadcrumbItemType[] = [
     },
 ];
 
-const form = useForm({
+const form = useForm<FormData>({
   content: '',
 });
 
-usePoll(5000);
+onMounted(() => {
+  Echo.private('posts')
+    .listen('NewPost', (event: NewPostEvent) => {
+      posts.value = [event.post, ...posts.value];
+    });
+});
+
+onUnmounted(() => {
+  if (Echo) {
+      Echo.leave('posts');
+  }
+});
 
 const submitForm = () => {
   form.post('/posts', {
-    onSuccess: () => form.reset('content'),
+    onSuccess: () => {
+      form.reset();
+    },
   });
 };
 </script>
@@ -73,15 +96,15 @@ const submitForm = () => {
             <!-- Posts List -->
             <div class="flex-1 rounded-xl border border-sidebar-border/70 p-4 dark:border-sidebar-border">
                 <h2 class="mb-4 text-xl font-semibold">Recent Posts</h2>
-                
-                <div v-if="props.posts.length === 0" class="py-10 text-center text-gray-500">
+
+                <div v-if="posts.length === 0" class="py-10 text-center text-gray-500">
                     No posts available yet. Be the first to post!
                 </div>
-                
+
                 <div v-else class="space-y-4">
-                    <div 
-                        v-for="post in props.posts" 
-                        :key="post.id" 
+                    <div
+                        v-for="post in posts"
+                        :key="post.id"
                         class="rounded-lg border border-sidebar-border/70 p-4 dark:border-sidebar-border"
                     >
                         <div class="mb-2 flex items-center">
@@ -94,4 +117,4 @@ const submitForm = () => {
             </div>
         </div>
     </AppLayout>
-</template> 
+</template>

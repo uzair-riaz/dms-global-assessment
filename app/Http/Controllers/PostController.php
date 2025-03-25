@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewPost;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Services\Interfaces\PostServiceInterface;
 use Inertia\Inertia;
@@ -26,10 +27,12 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $this->postService->createPost([
+        $post = $this->postService->createPost([
             'content' => $request->validated()['content'],
             'user_id' => $request->user()->id
         ]);
+
+        broadcast(new NewPost($post->load('user')));
 
         return redirect()->back();
     }
