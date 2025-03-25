@@ -10,6 +10,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./:/app
+      - ./storage/logs:/var/log/supervisor
     ports:
       - "8000:8000"
     depends_on:
